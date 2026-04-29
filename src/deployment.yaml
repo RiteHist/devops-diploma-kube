@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-webpage
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-webpage
+  template:
+    metadata:
+      labels:
+        app: nginx-webpage
+    spec:
+      containers:
+      - name: nginx
+        image: ritehist/nginx-with-amazing-webpage
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
